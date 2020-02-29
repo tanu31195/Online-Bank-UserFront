@@ -48,3 +48,20 @@ get method
 `public String signupPost(@ModelAttribute("user") User user, Model model)`
 @ModelAttribute("user") = retrieve a variable "user" from context of the submitted html form
 User user = Then gives the value to the User object defined and bind it to the new user instance
+
+
+`@OneToMany(mappedBy = "primaryAccount", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+@JsonIgnore
+private List<PrimaryTransaction> primaryTransactionList;`
+**CascadeType.ALL**: Any action updated will be propagated to related class
+**FetchType.LAZY**: When instantiating PrimaryAccount class it will not fetch any values from primaryTransactionList unless needed
+**@JsonIgnore**: Rounded reference relationship, when trying de-serialize to json format it will go into an infinite loop.
+This will break the loop by ignoring when trying to return the json format of the object
+ 
+`@Column(name = "userId", nullable = false, updatable = false)
+     private Long userId;`
+**nullable**:Cannot be empty
+**updatable**: Cannot be updated
+
+ ##Persistence
+Using Hibernate
