@@ -147,6 +147,10 @@ public class User {
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", enabled=" + enabled +
+                ", primaryAccount=" + primaryAccount +
+                ", savingsAccount=" + savingsAccount +
+                ", appointmentList=" + appointmentList +
+                ", recipientList=" + recipientList +
                 '}';
     }
 }

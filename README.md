@@ -65,3 +65,7 @@ This will break the loop by ignoring when trying to return the json format of th
 
  ##Persistence
 Using Hibernate
+
+
+#DDL
+CREATE SCHEMA `onlinebanking` ;
