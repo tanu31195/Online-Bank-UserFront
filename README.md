@@ -63,6 +63,29 @@ This will break the loop by ignoring when trying to return the json format of th
 **nullable**:Cannot be empty
 **updatable**: Cannot be updated
 
+`findBy` example findByUsername in `public interface UserDao extends CrudRepository<User, Long> {`
+Spring boot identifies findBy in the naming pattern and it will recognize that we are trying to retrieve a specific data.
+It will assume that we have username in User class.
+
+##Spring Security
+
+        `httpSecurity
+                .authorizeRequests()
+                .antMatchers(PUBLIC_MATCHERS)
+                .permitAll().anyRequest().authenticated();`
+Authorization for all matchers in PUBLIC_MATCHERS will permitted otherwise any request which does not match will be authenticated
+
+        `httpSecurity
+                .csrf().disable().cors().disable()
+                .formLogin().failureUrl("/index?error").defaultSuccessUrl("/userFront").loginPage("/index").permitAll()
+                .and()
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/index?logout").deleteCookies("remember-me").permitAll()
+                .and()
+                .rememberMe();`
+csrf and cors disabled protection from cors attacks  and avoid cross origin issues
+deleteCookies("remember-me") will delete cookies of remember me function and disable user remember me function 
+rememberMe() adds remember me function         
+
  ##Persistence
 Using Hibernate
 
