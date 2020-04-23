@@ -30,6 +30,9 @@ registers the class as a controller
 `@RequestMapping("/")`
 register path mapping for root path
 
+`@Transactional` annotation
+transaction propagation are handled automatically
+
 `"redirect:/index"`
 redirects to given path (to index) spring boot automatically handles because thymeleaf(template engine) is added
 the return string will be recognized as template name (index.html)
@@ -85,6 +88,12 @@ Authorization for all matchers in PUBLIC_MATCHERS will permitted otherwise any r
 csrf and cors disabled protection from cors attacks  and avoid cross origin issues
 deleteCookies("remember-me") will delete cookies of remember me function and disable user remember me function 
 rememberMe() adds remember me function         
+
+**GrantedAuthority**: Represents an authority granted to an _Authentication_ object.
+
+**Authentication**: Represents the token for an authentication request or for an authenticated principal once the request has been processed by the AuthenticationManager.authenticate(Authentication) method.
+
+**UserDetailsService**: Core interface which loads user-specific data. It is used throughout the framework as a user DAO and is the strategy used by the DaoAuthenticationProvider.
 
  ##Persistence
 Using Hibernate

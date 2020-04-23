@@ -7,6 +7,9 @@
 package io.github.tanu31195.UserFront.service;
 
 import io.github.tanu31195.UserFront.domain.User;
+import io.github.tanu31195.UserFront.security.UserRole;
+
+import java.util.Set;
 
 public interface UserService {
     User findByUsername(String username);
@@ -20,5 +23,7 @@ public interface UserService {
     boolean checkEmailExists(String email);
 
     void save(User user);
+
+    User createUser(User user, Set<UserRole> userRoles);
 
 }

@@ -6,6 +6,7 @@
 
 package io.github.tanu31195.UserFront.config;
 
+import io.github.tanu31195.UserFront.service.UserServiceImpl.UserSecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
