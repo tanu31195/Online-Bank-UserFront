@@ -95,9 +95,14 @@ rememberMe() adds remember me function
 
 **UserDetailsService**: Core interface which loads user-specific data. It is used throughout the framework as a user DAO and is the strategy used by the DaoAuthenticationProvider.
 
- ##Persistence
+**Principal**: Logged in user
+
+##Persistence
 Using Hibernate
 
 
 #DDL
 CREATE SCHEMA `onlinebanking` ;
+
+##Other information
+`https://datatables.net/` Table plug-in for jQuery
