@@ -9,8 +9,14 @@ package io.github.tanu31195.UserFront.service;
 import io.github.tanu31195.UserFront.domain.PrimaryAccount;
 import io.github.tanu31195.UserFront.domain.SavingsAccount;
 
+import java.security.Principal;
+
 public interface AccountService {
     PrimaryAccount createPrimaryAccount();
 
     SavingsAccount createSavingsAccount();
+
+    void deposit(String accountType, double amount, Principal principal);
+
+    void withdraw(String accountType, double amount, Principal principal);
 }
