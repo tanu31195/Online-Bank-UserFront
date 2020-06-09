@@ -10,6 +10,7 @@ import io.github.tanu31195.UserFront.dao.PrimaryAccountDao;
 import io.github.tanu31195.UserFront.dao.SavingsAccountDao;
 import io.github.tanu31195.UserFront.domain.*;
 import io.github.tanu31195.UserFront.service.AccountService;
+import io.github.tanu31195.UserFront.service.TransactionService;
 import io.github.tanu31195.UserFront.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,9 @@ public class AccountServiceImpl implements AccountService {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private TransactionService transactionService;
 
     @Override
     public PrimaryAccount createPrimaryAccount() {
@@ -65,7 +69,8 @@ public class AccountServiceImpl implements AccountService {
 
             PrimaryTransaction primaryTransaction = new PrimaryTransaction(date, "Deposit to Primary Account",
                     "Account", "Finished", amount, primaryAccount.getAccountBalance(), primaryAccount);
-
+            transactionService.savePrimaryDepositTransaction(primaryTransaction);
+//            primaryAccountDao.save(primaryTransaction);
 
         } else if (accountType.equalsIgnoreCase("Savings")) {
             SavingsAccount savingsAccount = user.getSavingsAccount();
@@ -75,7 +80,8 @@ public class AccountServiceImpl implements AccountService {
             Date date = new Date();
             SavingsTransaction savingsTransaction = new SavingsTransaction(date, "Deposit to savings Account",
                     "Account", "Finished", amount, savingsAccount.getAccountBalance(), savingsAccount);
-
+            transactionService.saveSavingsDepositTransaction(savingsTransaction);
+//            savingsAccountDao.save(savingsTransaction);
 
         }
     }
@@ -92,7 +98,8 @@ public class AccountServiceImpl implements AccountService {
 
             PrimaryTransaction primaryTransaction = new PrimaryTransaction(date, "Withdraw from Primary Account",
                     "Account", "Finished", amount, primaryAccount.getAccountBalance(), primaryAccount);
-
+            transactionService.savePrimaryWithdrawTransaction(primaryTransaction);
+//            primaryAccountDao.save(primaryTransaction);
 
         } else if (accountType.equalsIgnoreCase("Savings")) {
             SavingsAccount savingsAccount = user.getSavingsAccount();
@@ -102,7 +109,8 @@ public class AccountServiceImpl implements AccountService {
             Date date = new Date();
             SavingsTransaction savingsTransaction = new SavingsTransaction(date, "Withdraw from savings Account",
                     "Account", "Finished", amount, savingsAccount.getAccountBalance(), savingsAccount);
-
+            transactionService.saveSavingsWithdrawTransaction(savingsTransaction);
+//            savingsAccountDao.save(savingsTransaction);
 
         }
     }
