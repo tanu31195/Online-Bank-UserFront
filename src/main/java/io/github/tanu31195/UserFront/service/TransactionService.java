@@ -6,7 +6,9 @@
 
 package io.github.tanu31195.UserFront.service;
 
+import io.github.tanu31195.UserFront.domain.PrimaryAccount;
 import io.github.tanu31195.UserFront.domain.PrimaryTransaction;
+import io.github.tanu31195.UserFront.domain.SavingsAccount;
 import io.github.tanu31195.UserFront.domain.SavingsTransaction;
 
 import java.util.List;
@@ -23,4 +25,6 @@ public interface TransactionService {
     void savePrimaryWithdrawTransaction(PrimaryTransaction primaryTransaction);
 
     void saveSavingsWithdrawTransaction(SavingsTransaction savingsTransaction);
+
+    void betweenAccountsTransfer(String transferFrom, String transferTo, String amount, PrimaryAccount primaryAccount, SavingsAccount savingsAccount) throws Exception;
 }
