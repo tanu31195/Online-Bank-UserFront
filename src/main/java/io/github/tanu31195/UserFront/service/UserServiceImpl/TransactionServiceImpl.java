@@ -6,10 +6,7 @@
 
 package io.github.tanu31195.UserFront.service.UserServiceImpl;
 
-import io.github.tanu31195.UserFront.dao.PrimaryAccountDao;
-import io.github.tanu31195.UserFront.dao.PrimaryTransactionDao;
-import io.github.tanu31195.UserFront.dao.SavingsAccountDao;
-import io.github.tanu31195.UserFront.dao.SavingsTransactionDao;
+import io.github.tanu31195.UserFront.dao.*;
 import io.github.tanu31195.UserFront.domain.*;
 import io.github.tanu31195.UserFront.service.TransactionService;
 import io.github.tanu31195.UserFront.service.UserService;
@@ -17,8 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.security.Principal;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {
@@ -37,6 +36,9 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Autowired
     private SavingsAccountDao savingsAccountDao;
+
+    @Autowired
+    private RecipientDao recipientDao;
 
     public List<PrimaryTransaction> findPrimaryTransactionList(String username) {
         User user = userService.findByUsername(username);
@@ -96,5 +98,27 @@ public class TransactionServiceImpl implements TransactionService {
         } else {
             throw new Exception("Invalid Transfer");
         }
+    }
+
+    public List<Recipient> findRecipientList(Principal principal) {
+        String username = principal.getName();
+//        TODO: Filter through SQL to improve performance
+        List<Recipient> recipientList = recipientDao.findAll().stream() //convert list to stream
+                .filter(recipient -> username.equals(recipient.getUser().getUsername())) //filters the line
+                .collect(Collectors.toList());
+
+        return recipientList;
+    }
+
+    public Recipient saveRecipient(Recipient recipient) {
+        return recipientDao.save(recipient);
+    }
+
+    public Recipient findRecipientByName(String recipientName) {
+        return recipientDao.findByName(recipientName);
+    }
+
+    public void deleteRecipientByName(String recipientName) {
+        recipientDao.deleteByName(recipientName);
     }
 }

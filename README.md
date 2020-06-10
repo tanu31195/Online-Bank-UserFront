@@ -32,6 +32,7 @@ register path mapping for root path
 
 `@Transactional` annotation
 transaction propagation are handled automatically
+transaction happens in database
 
 `"redirect:/index"`
 redirects to given path (to index) spring boot automatically handles because thymeleaf(template engine) is added
@@ -52,6 +53,8 @@ get method
 @ModelAttribute("user") = retrieve a variable "user" from context of the submitted html form
 User user = Then gives the value to the User object defined and bind it to the new user instance
 
+`return "signup";`
+returns to the html template
 
 `@OneToMany(mappedBy = "primaryAccount", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 @JsonIgnore
